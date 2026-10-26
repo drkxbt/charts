@@ -1,0 +1,82 @@
+/* The tour fills the window exactly, so a recording of it is the cards and nothing else. */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.tour {
+  display: grid;
+  gap: 16px;
+  height: 100%;
+  padding: 16px;
+}
+
+.tour[data-chart="all"] {
+  grid-template: repeat(2, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr));
+}
+
+.tour .card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.tour .card[hidden] {
+  display: none;
+}
+
+.tour .frame {
+  flex: 1;
+  height: auto;
+  min-height: 0;
+}
+
+.tour[data-chart="all"] .quote-value {
+  font-size: 24px;
+}
+
+/* A stand-in for the pointer, since a screen recording leaves the real one out. */
+.ghost {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 20px;
+  height: 20px;
+  margin: -2px 0 0 -3px;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 45%));
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.ghost[data-hidden] {
+  opacity: 0;
+}
+
+.ghost-click {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 55%);
+  pointer-events: none;
+  animation: ghost-click 420ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes ghost-click {
+  from {
+    opacity: 1;
+    scale: 0.4;
+  }
+  to {
+    opacity: 0;
+    scale: 1.4;
+  }
+}

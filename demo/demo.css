@@ -1,0 +1,265 @@
+@font-face {
+  font-family: "Geist Mono";
+  src: url("fonts/geist-mono.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* The charts read the same --chart-* variables, so switching the theme here re-colours them on their next paint. */
+:root {
+  --bg: #0b0b0c;
+  --card: #111214;
+  --line: rgb(255 255 255 / 8%);
+  --text: #f4f4f2;
+  --muted: #81817e;
+  --chart-up: #0ecb81;
+  --chart-down: #f6465d;
+  --chart-accent: #2ff0b8;
+  --chart-text: #f4f4f2;
+  --chart-muted: #81817e;
+  --chart-grid: rgba(255, 255, 255, 0.07);
+  --chart-crosshair: rgba(255, 255, 255, 0.32);
+  --chart-label: #26272a;
+  --chart-surface: #111214;
+  --chart-font: "Geist Mono", ui-monospace, Consolas, monospace;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f5f4f0;
+  --card: #ffffff;
+  --line: rgb(18 18 18 / 9%);
+  --text: #121212;
+  --muted: #6b6c70;
+  --chart-up: #089981;
+  --chart-down: #e5484d;
+  --chart-accent: #0a8f6b;
+  --chart-text: #121212;
+  --chart-muted: #6b6c70;
+  --chart-grid: rgba(18, 18, 18, 0.08);
+  --chart-crosshair: rgba(18, 18, 18, 0.35);
+  --chart-label: #f0efeb;
+  --chart-surface: #ffffff;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.6 "Geist Mono", ui-monospace, Consolas, monospace;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+.page {
+  display: grid;
+  gap: 16px;
+  width: min(1180px, 100% - 32px);
+  margin: 0 auto;
+  padding: 40px 0 32px;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 8px;
+}
+
+.head h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.lede {
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+.head-tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sample {
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.theme {
+  height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme:active {
+  transform: scale(0.96);
+}
+
+.card {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card-head h2 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.seg {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.seg button {
+  min-width: 40px;
+  height: 28px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.seg button:hover {
+  color: var(--text);
+}
+
+.seg button[aria-pressed="true"] {
+  background: var(--line);
+  color: var(--text);
+}
+
+/* The range buttons sit under the line, flat and spread out. */
+.seg-flat {
+  justify-content: space-between;
+  padding: 0;
+  box-shadow: none;
+}
+
+.seg-flat button {
+  min-width: 0;
+  padding: 0 6px;
+}
+
+.seg-flat button[aria-pressed="true"] {
+  background: transparent;
+  color: var(--quote-color, var(--chart-up));
+  box-shadow: inset 0 -2px 0 currentColor;
+  border-radius: 0;
+}
+
+.quote-value {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.quote-change {
+  color: var(--quote-color, var(--chart-up));
+  font-variant-numeric: tabular-nums;
+}
+
+.frame {
+  min-width: 0;
+}
+
+.frame-candles {
+  height: 440px;
+}
+
+.frame-line {
+  height: 260px;
+}
+
+/* The depth chart takes whatever height the line card next to it ends up with. */
+.card-fill {
+  grid-template-rows: auto minmax(320px, 1fr);
+}
+
+.frame-heatmap {
+  height: 520px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.foot {
+  padding-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .frame-candles {
+    height: 360px;
+  }
+
+  .frame-heatmap {
+    height: 420px;
+  }
+}

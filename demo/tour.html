@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>charts tour</title>
+  <meta name="description" content="A looping tour of each chart. Add ?chart=candles, line, depth or heatmap to show one.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/geist-mono.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../charts.css">
+  <link rel="stylesheet" href="demo.css">
+  <link rel="stylesheet" href="tour.css">
+  <script type="module" src="tour.js"></script>
+</head>
+<body>
+  <main class="tour" data-tour>
+    <section class="card" data-card="candles" aria-labelledby="candles-title">
+      <div class="card-head">
+        <h2 id="candles-title">CandleChart</h2>
+        <div class="tools">
+          <div class="seg" role="group" aria-label="Chart type" data-candle-mode>
+            <button type="button" aria-pressed="true" value="candles">Candles</button>
+            <button type="button" aria-pressed="false" value="line">Line</button>
+          </div>
+          <div class="seg" role="group" aria-label="Interval" data-candle-interval>
+            <button type="button" aria-pressed="false" value="900">15m</button>
+            <button type="button" aria-pressed="true" value="3600">1h</button>
+            <button type="button" aria-pressed="false" value="14400">4h</button>
+            <button type="button" aria-pressed="false" value="86400">1D</button>
+          </div>
+        </div>
+      </div>
+      <div class="frame" data-candles></div>
+    </section>
+
+    <section class="card" data-card="line" aria-labelledby="line-title">
+      <div class="card-head">
+        <h2 id="line-title">LineChart</h2>
+      </div>
+      <div class="quote">
+        <p class="quote-value" data-quote-value>$187.42</p>
+        <p class="quote-change" data-quote-change>+0.00% Today</p>
+      </div>
+      <div class="frame" data-line></div>
+      <div class="seg seg-flat" role="group" aria-label="Range" data-line-range>
+        <button type="button" aria-pressed="true" value="1D">1D</button>
+        <button type="button" aria-pressed="false" value="1W">1W</button>
+        <button type="button" aria-pressed="false" value="1M">1M</button>
+        <button type="button" aria-pressed="false" value="3M">3M</button>
+        <button type="button" aria-pressed="false" value="1Y">1Y</button>
+        <button type="button" aria-pressed="false" value="ALL">ALL</button>
+      </div>
+    </section>
+
+    <section class="card" data-card="depth" aria-labelledby="depth-title">
+      <div class="card-head">
+        <h2 id="depth-title">DepthChart</h2>
+      </div>
+      <div class="frame" data-depth></div>
+    </section>
+
+    <section class="card" data-card="heatmap" aria-labelledby="heatmap-title">
+      <div class="card-head">
+        <h2 id="heatmap-title">Heatmap</h2>
+      </div>
+      <div class="frame frame-heatmap" data-heatmap></div>
+    </section>
+  </main>
+</body>
+</html>

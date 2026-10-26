@@ -1,0 +1,64 @@
+{
+  "name": "charts",
+  "version": "0.1.0",
+  "description": "Four canvas charts for markets in plain TypeScript: candles, a price line, an order book depth chart and a market heatmap.",
+  "license": "Apache-2.0",
+  "author": "drk",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./candles": {
+      "types": "./dist/candles/candles.d.ts",
+      "default": "./dist/candles/candles.js"
+    },
+    "./line": {
+      "types": "./dist/line/line.d.ts",
+      "default": "./dist/line/line.js"
+    },
+    "./depth": {
+      "types": "./dist/depth/depth.d.ts",
+      "default": "./dist/depth/depth.js"
+    },
+    "./heatmap": {
+      "types": "./dist/heatmap/heatmap.d.ts",
+      "default": "./dist/heatmap/heatmap.js"
+    },
+    "./charts.css": "./charts.css"
+  },
+  "files": [
+    "dist",
+    "charts.css"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "tsc -p tsconfig.json",
+    "test": "tsc -p tsconfig.json && node --test \"test/*.test.js\"",
+    "demo": "tsc -p tsconfig.json && node demo/serve.js"
+  },
+  "devDependencies": {
+    "typescript": ">=5.4"
+  },
+  "keywords": [
+    "chart",
+    "canvas",
+    "candlestick",
+    "depth-chart",
+    "treemap",
+    "heatmap",
+    "trading",
+    "crypto"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drkxbt/charts.git"
+  },
+  "homepage": "https://github.com/drkxbt/charts#readme"
+}

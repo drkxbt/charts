@@ -1,0 +1,186 @@
+/* charts: the few HTML overlays drawn over each canvas. Colours come from the same --chart-* properties the
+   canvases read, so one set of variables themes both. Give the container a height; the chart fills it. */
+
+.chart-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  font-family: var(--chart-font, ui-monospace, "SF Mono", Consolas, monospace);
+}
+
+.chart-root:focus-visible {
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px var(--chart-accent, #ccff00);
+}
+
+.chart-candles {
+  cursor: crosshair;
+}
+
+.chart-candles:active {
+  cursor: grabbing;
+}
+
+.chart-line {
+  cursor: crosshair;
+}
+
+.chart-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+/* The candle chart's hovered bar, over its top-left corner and out of the layout so it never moves it. */
+.chart-legend {
+  position: absolute;
+  top: 4px;
+  left: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 10px;
+  max-width: calc(100% - 84px);
+  margin: 0;
+  font-size: 12px;
+  color: var(--chart-muted, #81817e);
+  pointer-events: none;
+}
+
+/* On a narrow chart the values wrap to a second line instead of running under the price axis. */
+.chart-legend div {
+  display: flex;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.chart-legend dd {
+  margin: 0;
+  color: var(--chart-text, #f4f4f2);
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-legend dd[data-sign="1"] {
+  color: var(--chart-up, #0ecb81);
+}
+
+.chart-legend dd[data-sign="-1"] {
+  color: var(--chart-down, #f6465d);
+}
+
+/* Shown once the reader has stretched the price axis; puts prices back on the bars on screen. */
+.chart-auto {
+  position: absolute;
+  right: 70px;
+  bottom: 34px;
+  min-height: 26px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 12%);
+  color: var(--chart-text, #f4f4f2);
+  font: 500 12px/1 inherit;
+  cursor: pointer;
+  transition: background-color 160ms ease, transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.chart-auto:hover {
+  background: rgb(255 255 255 / 18%);
+}
+
+.chart-auto:active {
+  transform: scale(0.96);
+}
+
+.chart-auto[hidden] {
+  display: none;
+}
+
+/* The latest point: a dot with a ring that grows out of it and fades. */
+.chart-last-dot {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--chart-dot, var(--chart-accent, #ccff00));
+  box-shadow: 0 0 0 2px var(--chart-surface, #0b0b0c);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chart-last-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: chart-pulse 1.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@keyframes chart-pulse {
+  from {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(3.2);
+  }
+}
+
+/* The hover card for the depth chart and the heatmap. */
+.chart-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  gap: 4px;
+  min-width: 168px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--chart-label, #2a2a2a);
+  box-shadow: 0 8px 24px -8px rgb(0 0 0 / 60%), inset 0 0 0 1px rgb(255 255 255 / 6%);
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.chart-tip[hidden] {
+  display: none;
+}
+
+.chart-tip div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.chart-tip span {
+  color: var(--chart-muted, #81817e);
+}
+
+.chart-tip b {
+  color: var(--chart-text, #f4f4f2);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-tip[data-side="bid"] div:first-child b {
+  color: var(--chart-up, #0ecb81);
+}
+
+.chart-tip[data-side="ask"] div:first-child b {
+  color: var(--chart-down, #f6465d);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-last-dot::after {
+    animation: none;
+    opacity: 0;
+  }
+}
