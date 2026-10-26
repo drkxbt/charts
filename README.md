@@ -123,4 +123,4 @@ npm test
 
 ## License
 
-[Apache-2.0](LICENSE). The demo's Geist Mono font is under the [SIL Open Font License](demo/fonts/OFL.txt). See [NOTICE](NOTICE).
+[Apache-2.0](LICENSE).
