@@ -1,7 +1,7 @@
 charts
 Copyright 2026 drk
 
-Licensed under the Apache License, Version 2.0. See LICENSE.
+Licensed under the MIT License. See LICENSE.
 
 The demo page ships the Geist Mono typeface by Vercel, in collaboration with
 basement.studio, in demo/fonts/. It is licensed under the SIL Open Font License

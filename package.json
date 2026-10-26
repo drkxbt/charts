@@ -2,7 +2,7 @@
   "name": "charts",
   "version": "0.1.0",
   "description": "Four canvas charts for markets in plain TypeScript: candles, a price line, an order book depth chart and a market heatmap.",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "author": "drk",
   "type": "module",
   "main": "./dist/index.js",
