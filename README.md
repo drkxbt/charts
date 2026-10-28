@@ -2,6 +2,8 @@
 
 Four canvas charts for markets, written in plain TypeScript with no runtime dependencies. Each chart lives in its own folder and can be imported on its own.
 
+Try the [charts on drk.vc](https://drk.vc/repo?id=charts#preview).
+
 ![The four charts in use: candles, a price line, order book depth and a market heatmap](demo/overview.webp)
 
 | Folder | Chart | What it shows |
